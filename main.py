@@ -18,3 +18,6 @@ for k in range(4000):
     peopleList.append(su.Person(id, infStatus, susceptibility))
 
 for person in peopleList: print(str(person))
+
+for i in range(8):
+    print(i)
