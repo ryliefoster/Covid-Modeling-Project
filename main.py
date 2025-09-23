@@ -2,8 +2,6 @@ import random
 import social_units as su
 import interactions as intr
 
-
-
 # Step 1: Generate populations (staff, non-staff, etc.)
 
 peopleList = []
@@ -17,4 +15,4 @@ for k in range(4000):
     susceptibility = random.uniform(0,1)
     peopleList.append(su.Person(id, infStatus, susceptibility))
 
-for person in peopleList: print(str(person))
+howdy
