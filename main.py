@@ -1,18 +1,25 @@
 import random
 import social_units as su
-import interactions as intr
+
+POP_SIZE = 1000
+DAYS = 30
 
 # Step 1: Generate populations (staff, non-staff, etc.)
 
 peopleList = []
 
-for k in range(4000):
+for k in range(POP_SIZE):
     id = k
     x = random.uniform(0,1)
-    infStatus = "SUSCEPTIBLE"
+    status = 'S'
     if x < 0.01:
-        infStatus = "INFECTED"
+        status = 'I'
     susceptibility = random.uniform(0,1)
-    peopleList.append(su.Person(id, infStatus, susceptibility))
+    peopleList.append(su.Person(id, status, susceptibility))
 
-howdy
+passengers = su.Population(peopleList)
+print(f"S={passengers.susceptible}, E={passengers.exposed}, I={passengers.infected}, R={passengers.removed}\n")
+
+for day in range(DAYS):
+    passengers.updateSEIR()
+    print(f"S={passengers.susceptible}, E={passengers.exposed}, I={passengers.infected}, R={passengers.removed}\n")

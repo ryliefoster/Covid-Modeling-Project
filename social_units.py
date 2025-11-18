@@ -16,11 +16,11 @@ class Person:
     def getId(self):
         return self.id
     
-    def getInfStatus(self):
-        return self.infStatus
+    def getStatus(self):
+        return self.Status
     
-    def setInfStatus(self, status):
-        self.infStatus = status
+    def setStatus(self, status):
+        self.Status = status
     
     def getSusceptibility(self):
         return self.susceptibility
@@ -48,21 +48,31 @@ class Person:
 
 
 class Population:
-    def __init__(self, members, susceptible, exposed, infected, removed):
+    def __init__(self, members):
         self.members = members
-        self.susceptible = susceptible
-        self.exposed = exposed
-        self.infected = infected
-        self.removed = removed
+        self.susceptible = 0
+        self.exposed = 0
+        self.infected = 0
+        self.removed = 0
+        
+        for member in members:
+            if member.status == 'S':
+                self.susceptible += 1
+            if member.status == 'E':
+                self.exposed += 1
+            if member.status == 'I':
+                self.infected += 1
+            if member.status == 'R':
+                self.removed += 1
 
     def updateSEIR(self):
         for m in self.members:
-            exposureProb = m.calculateExposure(len(self.members), self.infected, len(self.members))
+            exposureProb = m.calculateExposureProbablity(len(self.members), self.infected, len(self.members))
             m.updateStatus(exposureProb)
         self.susceptible = 0
         self.exposed = 0
         self.infected = 0
-        self.infected = 0
+        self.removed = 0
         for m in self.members:
             if m.getStatus() == 'S':
                 self.susceptible += 1
