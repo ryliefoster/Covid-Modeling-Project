@@ -11,7 +11,7 @@ class Person:
         self.daysInfected = 0
 
     def __str__(self):
-        return(f"{str(self.id)} {str(self.infStatus)} {str(self.susceptibility)}")
+        return(f"{str(self.id)} {str(self.status)} {str(self.susceptibility)}")
 
     def getId(self):
         return self.id
@@ -67,7 +67,7 @@ class Population:
 
     def updateSEIR(self):
         for m in self.members:
-            exposureProb = m.calculateExposureProbablity(200, self.infected, len(self.members))
+            exposureProb = m.calculateExposureProbablity(0.1*len(self.members), self.infected, len(self.members))
             m.updateStatus(exposureProb)
         self.susceptible = 0
         self.exposed = 0

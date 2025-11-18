@@ -1,8 +1,8 @@
 import random
 import social_units as su
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
-POP_SIZE = 1000
+POP_SIZE = 3000
 DAYS = 30
 
 # Step 1: Generate populations (staff, non-staff, etc.)
@@ -28,4 +28,4 @@ for day in range(DAYS):
     data.append([passengers.susceptible, passengers.exposed, passengers.infected, passengers.removed])
 
 plt.plot(data)
-plt.show
+plt.show()
