@@ -30,7 +30,7 @@ class Person:
             interactions = random.randint(0, maxInteractions)
             exposureExents = interactions * infected / total
             nonExposureProb = (1-cc.singleExposureProb)**exposureExents
-            return 1-nonExposureProb
+            return self.susceptibility*(1-nonExposureProb)
     
     def updateStatus(self, exposureProb):
         if self.status == 'S':
