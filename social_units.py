@@ -17,10 +17,10 @@ class Person:
         return self.id
     
     def getStatus(self):
-        return self.Status
+        return self.status
     
     def setStatus(self, status):
-        self.Status = status
+        self.status = status
     
     def getSusceptibility(self):
         return self.susceptibility
@@ -67,7 +67,7 @@ class Population:
 
     def updateSEIR(self):
         for m in self.members:
-            exposureProb = m.calculateExposureProbablity(len(self.members), self.infected, len(self.members))
+            exposureProb = m.calculateExposureProbablity(200, self.infected, len(self.members))
             m.updateStatus(exposureProb)
         self.susceptible = 0
         self.exposed = 0

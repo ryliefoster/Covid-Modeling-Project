@@ -1,5 +1,6 @@
 import random
 import social_units as su
+import matplotlib as plt
 
 POP_SIZE = 1000
 DAYS = 30
@@ -18,8 +19,13 @@ for k in range(POP_SIZE):
     peopleList.append(su.Person(id, status, susceptibility))
 
 passengers = su.Population(peopleList)
+data = []
 print(f"S={passengers.susceptible}, E={passengers.exposed}, I={passengers.infected}, R={passengers.removed}\n")
-
+data.append([passengers.susceptible, passengers.exposed, passengers.infected, passengers.removed])
 for day in range(DAYS):
     passengers.updateSEIR()
     print(f"S={passengers.susceptible}, E={passengers.exposed}, I={passengers.infected}, R={passengers.removed}\n")
+    data.append([passengers.susceptible, passengers.exposed, passengers.infected, passengers.removed])
+
+plt.plot(data)
+plt.show
