@@ -1,0 +1,35 @@
+import random
+
+import interactions
+import social_units as su
+import interactions as intr
+
+# Step 1: Generate populations (staff, non-staff, etc.)
+
+peopleList = []
+
+#for k in range(4000):
+#    id = k
+#    x = random.uniform(0,1)
+#    infStatus = "SUSCEPTIBLE"
+#    if x < 0.01:
+#        infStatus = "INFECTED"
+#    susceptibility = random.uniform(0,1)
+#    peopleList.append(su.Person(id, infStatus, susceptibility))
+
+
+#my_object = intr.Population("object_name", 123)
+#print(intr.Population.updateSEIR())
+
+
+people = []
+total_populations = []
+for k in range(500):
+    peopleList.append(intr.Person(k, 'S', .5))
+
+starting_pop = intr.Population(peopleList, 0, 0, 2 ,0)
+
+for day in range(30):
+    interactions.Population.updateSEIR(starting_pop)
+    total_populations.append(starting_pop)
+    print(starting_pop)
