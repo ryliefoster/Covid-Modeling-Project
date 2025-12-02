@@ -31,7 +31,7 @@ class Person:
 
     def calculateExposureProbablity(self, maxInteractions, infected, total, singleExposureProb):
         if self.status == "S":
-            interactions = random.randint(0, np.floor(maxInteractions)) #maxInteractions*.5
+            interactions = random.randint(int(np.floor(maxInteractions*total*.9)), int(np.floor(maxInteractions*total))) #maxInteractions*.5
             exposureExents = interactions * infected / total
             nonExposureProb = (1 - singleExposureProb) ** exposureExents
             return self.susceptibility * (1 - nonExposureProb)
