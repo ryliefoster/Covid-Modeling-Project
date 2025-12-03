@@ -1,11 +1,20 @@
 import numpy as np
+from scipy.stats import qmc
 
+'''
 # create LHC
-single_infection = np.linspace(start, stop, num= 100)
-max_int = np.linspace(start, stop, num = 100)
-param_4 = np.linspace(start, stop, num=100)
-param_5 = np.linspace(start, stop, num=100)
+single_infection = np.linspace(start, stop, num= 1000)
+max_int = np.linspace(start, stop, num = 1000)
+#param_4 = np.linspace(start, stop, num=100)
+#param_5 = np.linspace(start, stop, num=10)
 
+
+# run through parameters
+params = []
+for i in single_infection:
+    for j in max_int:
+        param = (i, j)
+        params.append(params)
 
 # run through parameters
 params = []
@@ -16,6 +25,32 @@ for i in single_infection:
                 # generate fit
                 param = (i, j, k, l)
                 params.append(params)
+'''
+
+#Generation of samples of paramter sets 
+nparams = 2 #no. of parameters
+nsample = 10000 #no. of samples
+sampler = qmc.LatinHypercube(d=nparams)
+sample = sampler.random(n=nsample)
+
+#Uniform sampling
+min_vals = [0, 0] #minimum values of parameters - get from Jordan
+max_vals = [2, 2] #maximum values of parameters - get from Jordan
+l_bounds = np.array(min_vals)
+u_bounds = np.array(max_vals) 
+sample_params = qmc.scale(sample, l_bounds, u_bounds)
+a_sample = sample_params[:,0]
+b_sample = sample_params[:,1]
+
+gen_data = []
+
+for i in range(nsample):
+    a = a_sample[i]
+    b = b_sample[i]
+
+    model = # generate model data
+    gen_data.append(model)
+
 
 # calculate residuals
 # data:
