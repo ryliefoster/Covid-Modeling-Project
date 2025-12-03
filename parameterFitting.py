@@ -6,12 +6,19 @@ import model
 
 
 def parameterFit():
-    x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], dtype=np.int32)
-    y = np.array([1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 11, 21, 62, 65, 71, 136, 136, 175, 219, 219, 286, 356, 455, 543, 622], dtype=np.int32)
+    x = np.array([
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30, 31, 34
+    ])
 
+    y = np.array([
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10, 20, 61, 64, 70, 135, 174, 218, 285, 355, 454, 542, 621, 634,
+        691
+    ])
     plt.plot(x, y, 'o')
-    initial_params = [0.0008172448979591837, 0.00020506122448979593] #[0.02050612244897959, 0.06131836734693878]
-    param, param_cov = curve_fit(model.model, x, y, p0=initial_params)
+    initial_params = [0.0009388367346938776, 0.00016385714285714286]#[0.0008172448979591837, 0.00020506122448979593] #[0.02050612244897959, 0.06131836734693878]
+    param_bounds = ((0.000001, 0.000001), (.001, .0004))
+    param, param_cov = curve_fit(model.model, x, y, p0=initial_params, bounds=param_bounds)
+    print(param)
     x_line = np.arange(30)
     y_line = model.model(x_line, param[0], param[1])
     plt.plot(x_line, y_line)
@@ -26,8 +33,8 @@ def parameterFit1():
         [1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 11, 21, 62, 65, 71, 136, 136, 175, 219, 219, 286, 356, 455, 543,
          622], dtype=np.int32)
 
-    exposureProb = np.linspace(0.000001, .01, 50)
-    maxInteractions = np.linspace(0.000001, .01, 50)
+    exposureProb = np.linspace(0.000001, .001, 50)
+    maxInteractions = np.linspace(0.000001, .0004, 50)
     best = 1e20
     ep = 0
     mi = 0
